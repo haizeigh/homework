@@ -65,15 +65,23 @@ def show(dataSet, k, center, cluster):
 
 def main():
     print("读取数据")
-    file = open("/Users/xmly/desktop/testSet.txt")
+    file = open("/Users/xmly/desktop/testSet 2.txt")
     dataSet = []
     for line in file:
         lineArr = line.split("\t")
-        dataSet.append([float(lineArr[0]),float(lineArr[1])])
+        dataSet.append([float(lineArr[0]),np.sqrt(float(lineArr[1]))])
+
+    thelen = len(dataSet)
+    mark = ['or', 'ob', 'og', 'om']
+    print(thelen/2)
+    for i in range(int(thelen/2)):
+        plt.plot(dataSet[2*i][0], dataSet[2*i][1], mark[i])
+        plt.plot(dataSet[2*i+1][0], dataSet[2*i+1][1], mark[i])
+    plt.show()
 
     print("聚簇")
     dataSet = np.mat(dataSet)
-    k = 4
+    k = 3
     center,cluster = kmeans(dataSet,k,100)
 
     print("显示簇")
